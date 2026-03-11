@@ -10,8 +10,17 @@
   text-align: center;
 }
 
+.app-shell--page {
+  display: block;
+  padding: 1rem 1rem 2rem;
+}
+
 @media (max-width: 640px) {
   .app-shell {
     padding: 1rem;
+  }
+
+  .app-shell--page {
+    padding: 0.75rem 0.75rem 1.5rem;
   }
 }
