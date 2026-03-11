@@ -1,0 +1,28 @@
+import './MainMenu.css'
+
+function MainMenu({ onUserLogin, onGuestLogin }) {
+  return (
+    <section className="main-menu">
+      <div className="main-menu__panel">
+        <h1>LA LOGIA</h1>
+        <p className="main-menu__description">
+          Ingresa con tu cuenta para acceder a tu espacio o entra como invitado para conocer la plataforma.
+        </p>
+
+        <div className="main-menu__actions">
+
+          <button type="button" className="main-menu__button main-menu__button--primary" onClick={onUserLogin}>
+            Entrar como usuario
+          </button>
+
+          <button type="button" className="main-menu__button main-menu__button--secondary" onClick={onGuestLogin}>
+            Entrar como invitado
+          </button>
+
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default MainMenu
