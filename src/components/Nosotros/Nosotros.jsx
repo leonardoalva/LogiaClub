@@ -69,12 +69,11 @@ const Nosotros = ({ onBack }) => {
         </section>
 
         <section className="nosotros__section nosotros__section--closing">
-          <span className="nosotros__kicker">La experiencia</span>
-          <h2>Disenada para recorrerse con calma</h2>
+          <h2>¿Querés ser parte?</h2>
+          <span className="nosotros__kicker">Comunicate con nosotros para unirte al club</span>
           <p>
-            Esta pagina esta pensada como una presentacion mobile-first: bloques
-            verticales, lectura comoda y un flujo natural a traves del scroll
-            para contar la identidad del club paso a paso.
+            Estamos aquí para responder tus preguntas y guiarte en el proceso de membresía,
+            también gestionamos tu permiso de reprocann y te acompañamos en todo el proceso.
           </p>
         </section>
 

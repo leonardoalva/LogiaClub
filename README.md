@@ -1,5 +1,15 @@
 # React + Vite
 
+## Google Login
+
+Para iniciar sesion con Google desde el boton de usuario, crea un archivo `.env` en la raiz del proyecto con esta variable:
+
+```env
+VITE_GOOGLE_CLIENT_ID=tu-client-id-de-google.apps.googleusercontent.com
+```
+
+El flujo actual abre la pantalla de acceso de Google y vuelve a la misma URL con el parametro `code`. El intercambio de ese `code` por una sesion valida todavia requiere backend o una integracion OAuth completa.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
