@@ -1,5 +1,6 @@
 import './UsuarioActionPage.css'
 
+// Datos simulados para representar el estado de pago de cada mes.
 const cuotaStatusByMonth = [
   { month: 'Ene', status: 'al-dia' },
   { month: 'Feb', status: 'al-dia' },
@@ -18,6 +19,7 @@ const cuotaStatusByMonth = [
 function CuotaCalendar() {
   return (
     <div className="usuario-action-page__calendar-card">
+      {/* Encabezado del calendario con titulo y referencias visuales. */}
       <div className="usuario-action-page__calendar-header">
         <div>
           <p className="usuario-action-page__calendar-eyebrow">Estado de cuota al dia</p>
@@ -29,6 +31,7 @@ function CuotaCalendar() {
             <span className="usuario-action-page__legend-dot usuario-action-page__legend-dot--paid" />
             Al dia
           </span>
+
           <span className="usuario-action-page__legend-item">
             <span className="usuario-action-page__legend-dot usuario-action-page__legend-dot--pending" />
             Pendiente
@@ -37,13 +40,14 @@ function CuotaCalendar() {
       </div>
 
       <div className="usuario-action-page__calendar-grid">
+        {/* Genera un bloque por mes y cambia el estilo segun el estado. */}
         {cuotaStatusByMonth.map(({ month, status }) => (
           <article
             key={month}
             className={`usuario-action-page__month usuario-action-page__month--${status}`}
           >
             <span className="usuario-action-page__month-name">{month}</span>
-            <strong>{status === 'al-dia' ? 'Pagado' : 'Pendiente'}</strong>
+            <strong>{status === 'al-dia' ? 'Al dia' : 'Pendiente'}</strong>
           </article>
         ))}
       </div>
@@ -54,6 +58,7 @@ function CuotaCalendar() {
 function UsuarioActionPage({ eyebrow, title, description, highlights, onBack }) {
   return (
     <section className="usuario-action-page">
+      {/* Hero con el contenido principal de la seccion seleccionada. */}
       <div className="usuario-action-page__hero">
         <p className="usuario-action-page__eyebrow">{eyebrow}</p>
         <h1>{title}</h1>
@@ -64,6 +69,7 @@ function UsuarioActionPage({ eyebrow, title, description, highlights, onBack }) 
         <h2>Acceso rapido</h2>
 
         <div className="usuario-action-page__highlights">
+          {/* Muestra items simples o el calendario completo cuando corresponde. */}
           {highlights.map((highlight) => (
             highlight === 'Estado de cuota al dia' ? (
               <CuotaCalendar key={highlight} />
@@ -76,6 +82,7 @@ function UsuarioActionPage({ eyebrow, title, description, highlights, onBack }) 
         </div>
       </article>
 
+      {/* Navegacion de regreso al menu del usuario. */}
       <div className="usuario-action-page__footer">
         <button type="button" className="usuario-action-page__back" onClick={onBack}>
           Volver al menu de usuario

@@ -5,6 +5,7 @@ import UsuarioMenu from './components/UsuarioMenu/UsuarioMenu'
 import UsuarioActionPage from './components/UsuarioActionPage/UsuarioActionPage'
 import './App.css'
 
+// Este objeto centraliza el contenido de cada seccion del espacio de usuario.
 const userPages = {
   pagos: {
     eyebrow: 'Panel de pagos',
@@ -33,32 +34,40 @@ const userPages = {
 }
 
 function App() {
+  // Guarda la vista actual para decidir que pantalla mostrar.
   const [currentView, setCurrentView] = useState('menu')
 
+  // Lleva al usuario autenticado al menu interno.
   const handleUserLogin = () => {
     setCurrentView('usuario')
   }
 
+  // Lleva al visitante a la pantalla informativa del club.
   const handleGuestLogin = () => {
     setCurrentView('nosotros')
   }
 
+  // Vuelve siempre al menu principal de entrada.
   const handleBackToMenu = () => {
     setCurrentView('menu')
   }
 
+  // Cambia a la seccion elegida dentro del menu de usuario.
   const handleUserSectionNavigate = (section) => {
     setCurrentView(section)
   }
 
+  // Desde una subpagina de usuario, regresa al menu interno.
   const handleBackToUserMenu = () => {
     setCurrentView('usuario')
   }
 
+  // Busca la configuracion de la pagina actual si currentView coincide con una clave de userPages.
   const currentUserPage = userPages[currentView]
 
   return (
     <main className={`app-shell${currentView !== 'menu' ? ' app-shell--page' : ''}`}>
+      {/* Renderiza una vista distinta segun el estado actual de la aplicacion. */}
       {currentView === 'menu' ? (
         <MainMenu onUserLogin={handleUserLogin} onGuestLogin={handleGuestLogin} />
       ) : currentView === 'usuario' ? (
