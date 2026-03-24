@@ -21,7 +21,7 @@ const options = [
   },
 ];
 
-function UsuarioMenu({ onBack, onNavigate, usuarioReprocann }) {
+function UsuarioMenu({ onBack, usuarioReprocann }) {
   // Si usuarioReprocann es false, muestra reprocann primero.
   const sortedOptions = usuarioReprocann === false
     ? [options.find((o) => o.key === 'reprocann'), ...options.filter((o) => o.key !== 'reprocann')]
@@ -49,7 +49,6 @@ function UsuarioMenu({ onBack, onNavigate, usuarioReprocann }) {
             <button
               type="button"
               className="usuario-menu__action"
-              onClick={() => onNavigate(option.key)}
             >
               {option.buttonLabel}
             </button>
