@@ -43,6 +43,12 @@ function App() {
   const [uid, setUid] = useState(null)
   // Estado del campo usuarioReprocann del documento en Firestore.
   const [usuarioReprocann, setUsuarioReprocann] = useState(null)
+  // Controla la visibilidad del modal de documento.
+  const [showDniModal, setShowDniModal] = useState(false)
+  // Numero de documento ingresado en el modal.
+  const [dniInput, setDniInput] = useState('')
+  // Guarda temporalmente el user de Google hasta que se complete el modal.
+  const [pendingUser, setPendingUser] = useState(null)
 
   // Restaura la sesion si el usuario ya estaba autenticado en esta ventana.
   useEffect(() => {
@@ -68,32 +74,56 @@ function App() {
       const snap = await getDoc(userRef)
 
       if (!snap.exists()) {
-        await setDoc(userRef, {
-          nombre: user.displayName || '',
-          email: user.email || '',
-          usuarioReprocann: false,
-          isAdmin: false,
-          esMiembro: false,
-          creadoEn: new Date().toISOString(),
-        })
-        console.log('Documento creado para:', user.uid)
-        alert('Tu cuenta fue registrada. Un administrador debe autorizar tu acceso.')
-        await auth.signOut()
+        setPendingUser(user)
+        setShowDniModal(true)
         return
       }
 
-      if (snap.data().esMiembro === true) {
+      if (snap.data().isMember === true) {
         setUid(user.uid)
         setUsuarioReprocann(snap.data().usuarioReprocann)
         setCurrentView('usuario')
       } else {
-        console.warn('Usuario sin campo esMiembro.')
+        console.warn('Usuario sin campo isMember.')
         alert('No tenes acceso. Contacta al administrador del club.')
         await auth.signOut()
       }
     } catch (error) {
       console.error('Error al autenticar:', error)
     }
+  }
+
+  // Confirma el DNI del modal y crea el documento en Firestore.
+  const handleDniSubmit = async () => {
+    if (!dniInput.trim() || !pendingUser) return
+    try {
+      const userRef = doc(db, 'usuarios', pendingUser.uid)
+      await setDoc(userRef, {
+        nombre: pendingUser.displayName || '',
+        email: pendingUser.email || '',
+        documento: dniInput.trim(),
+        usuarioReprocann: false,
+        isAdmin: false,
+        isMember: false,
+        creadoEn: new Date().toISOString(),
+      })
+      console.log('Documento creado para:', pendingUser.uid)
+      setShowDniModal(false)
+      setDniInput('')
+      setPendingUser(null)
+      alert('Tu cuenta fue registrada. Un administrador debe autorizar tu acceso.')
+      await auth.signOut()
+    } catch (error) {
+      console.error('Error al guardar documento:', error)
+    }
+  }
+
+  // Cancela el modal y cierra la sesion.
+  const handleDniCancel = async () => {
+    setShowDniModal(false)
+    setDniInput('')
+    setPendingUser(null)
+    await auth.signOut()
   }
 
   // Lleva al visitante a la pantalla informativa del club.
@@ -130,6 +160,31 @@ function App() {
         <UsuarioActionPage {...currentUserPage} onBack={handleBackToUserMenu} />
       ) : (
         <Nosotros onBack={handleBackToMenu} />
+      )}
+      {/* Modal para ingresar numero de documento. */}
+      {showDniModal && (
+        <div className="dni-modal-overlay" onClick={handleDniCancel}>
+          <div className="dni-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>Numero de documento</h2>
+            <p>Ingresa tu DNI para completar el registro.</p>
+            <input
+              type="text"
+              className="dni-modal__input"
+              placeholder="Ej: 12345678"
+              value={dniInput}
+              onChange={(e) => setDniInput(e.target.value)}
+              autoFocus
+            />
+            <div className="dni-modal__actions">
+              <button type="button" className="dni-modal__btn dni-modal__btn--primary" onClick={handleDniSubmit}>
+                Confirmar
+              </button>
+              <button type="button" className="dni-modal__btn dni-modal__btn--secondary" onClick={handleDniCancel}>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </main>
   )
