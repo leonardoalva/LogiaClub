@@ -1,4 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { signInWithPopup, onAuthStateChanged } from 'firebase/auth'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { auth, googleProvider, db } from './firebase'
 import MainMenu from './components/MainMenu/MainMenu'
 import Nosotros from './components/Nosotros/Nosotros'
 import UsuarioMenu from './components/UsuarioMenu/UsuarioMenu'
@@ -36,10 +39,61 @@ const userPages = {
 function App() {
   // Guarda la vista actual para decidir que pantalla mostrar.
   const [currentView, setCurrentView] = useState('menu')
+  // UID del usuario autenticado con Firebase Auth.
+  const [uid, setUid] = useState(null)
+  // Estado del campo usuarioReprocann del documento en Firestore.
+  const [usuarioReprocann, setUsuarioReprocann] = useState(null)
 
-  // Lleva al usuario autenticado al menu interno.
-  const handleUserLogin = () => {
-    setCurrentView('usuario')
+  // Restaura la sesion si el usuario ya estaba autenticado en esta ventana.
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const snap = await getDoc(doc(db, 'usuarios', user.uid))
+        if (snap.exists()) {
+          setUid(user.uid)
+          setUsuarioReprocann(snap.data().usuarioReprocann)
+          setCurrentView('usuario')
+        }
+      }
+    })
+    return unsubscribe
+  }, [])
+
+  // Autentica con Google, crea el documento en Firestore si no existe y verifica permiso.
+  const handleUserLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider)
+      const user = result.user
+      const userRef = doc(db, 'usuarios', user.uid)
+      const snap = await getDoc(userRef)
+
+      if (!snap.exists()) {
+        await setDoc(userRef, {
+          nombre: user.displayName || '',
+          email: user.email || '',
+          usuarioReprocann: false,
+          isAdmin: false,
+          esMiembro: false,
+          creadoEn: new Date().toISOString(),
+        })
+        console.log('Documento creado para:', user.uid)
+        alert('Tu cuenta fue registrada. Un administrador debe autorizar tu acceso.')
+        await auth.signOut()
+        return
+      }
+
+      if (snap.data().esMiembro === true) {
+        setUid(user.uid)
+        setUsuarioReprocann(snap.data().usuarioReprocann)
+        setCurrentView('usuario')
+      } else {
+        console.warn('Usuario sin campo esMiembro.')
+        alert('No tenes acceso. Contacta al administrador del club.')
+        await auth.signOut()
+      }
+    } catch (error) {
+      console.error('Error al autenticar:', error)
+    }
   }
 
   // Lleva al visitante a la pantalla informativa del club.
@@ -71,7 +125,7 @@ function App() {
       {currentView === 'menu' ? (
         <MainMenu onUserLogin={handleUserLogin} onGuestLogin={handleGuestLogin} />
       ) : currentView === 'usuario' ? (
-        <UsuarioMenu onBack={handleBackToMenu} onNavigate={handleUserSectionNavigate} />
+        <UsuarioMenu onBack={handleBackToMenu} onNavigate={handleUserSectionNavigate} usuarioReprocann={usuarioReprocann} />
       ) : currentUserPage ? (
         <UsuarioActionPage {...currentUserPage} onBack={handleBackToUserMenu} />
       ) : (

@@ -1,59 +1,7 @@
 import './UsuarioActionPage.css'
 
-// Datos simulados para representar el estado de pago de cada mes.
-const cuotaStatusByMonth = [
-  { month: 'Ene', status: 'al-dia' },
-  { month: 'Feb', status: 'al-dia' },
-  { month: 'Mar', status: 'al-dia' },
-  { month: 'Abr', status: 'al-dia' },
-  { month: 'May', status: 'al-dia' },
-  { month: 'Jun', status: 'al-dia' },
-  { month: 'Jul', status: 'pendiente' },
-  { month: 'Ago', status: 'pendiente' },
-  { month: 'Sep', status: 'pendiente' },
-  { month: 'Oct', status: 'pendiente' },
-  { month: 'Nov', status: 'pendiente' },
-  { month: 'Dic', status: 'pendiente' },
-]
 
-function CuotaCalendar() {
-  return (
-    <div className="usuario-action-page__calendar-card">
-      {/* Encabezado del calendario con titulo y referencias visuales. */}
-      <div className="usuario-action-page__calendar-header">
-        <div>
-          <p className="usuario-action-page__calendar-eyebrow">Estado de cuota al dia</p>
-          <h3>Calendario anual de pagos</h3>
-        </div>
 
-        <div className="usuario-action-page__calendar-legend" aria-label="Referencias de estado de cuota">
-          <span className="usuario-action-page__legend-item">
-            <span className="usuario-action-page__legend-dot usuario-action-page__legend-dot--paid" />
-            Al dia
-          </span>
-
-          <span className="usuario-action-page__legend-item">
-            <span className="usuario-action-page__legend-dot usuario-action-page__legend-dot--pending" />
-            Pendiente
-          </span>
-        </div>
-      </div>
-
-      <div className="usuario-action-page__calendar-grid">
-        {/* Genera un bloque por mes y cambia el estilo segun el estado. */}
-        {cuotaStatusByMonth.map(({ month, status }) => (
-          <article
-            key={month}
-            className={`usuario-action-page__month usuario-action-page__month--${status}`}
-          >
-            <span className="usuario-action-page__month-name">{month}</span>
-            <strong>{status === 'al-dia' ? 'Al dia' : 'Pendiente'}</strong>
-          </article>
-        ))}
-      </div>
-    </div>
-  )
-}
 
 function UsuarioActionPage({ eyebrow, title, description, highlights, onBack }) {
   return (
@@ -71,13 +19,9 @@ function UsuarioActionPage({ eyebrow, title, description, highlights, onBack }) 
         <div className="usuario-action-page__highlights">
           {/* Muestra items simples o el calendario completo cuando corresponde. */}
           {highlights.map((highlight) => (
-            highlight === 'Estado de cuota al dia' ? (
-              <CuotaCalendar key={highlight} />
-            ) : (
-              <span key={highlight} className="usuario-action-page__highlight">
-                {highlight}
-              </span>
-            )
+            <span key={highlight} className="usuario-action-page__highlight">
+              {highlight}
+            </span>
           ))}
         </div>
       </article>

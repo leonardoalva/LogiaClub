@@ -4,14 +4,6 @@ import WhatsAppCard from "../WhatsAppCard/WhatsAppCard";
 // Opciones disponibles dentro del espacio privado del usuario.
 const options = [
   {
-    key: "pagos",
-    title: "Pagos del club",
-    eyebrow: "Panel de pagos",
-    description:
-      "Consulta vencimientos, revisa el estado de tu cuota y accede a la informacion necesaria para mantener tu membresia al dia.",
-    buttonLabel: "Ir a pagos",
-  },
-  {
     key: "cursos",
     title: "Cursos online",
     eyebrow: "Formacion",
@@ -29,7 +21,12 @@ const options = [
   },
 ];
 
-function UsuarioMenu({ onBack, onNavigate }) {
+function UsuarioMenu({ onBack, onNavigate, usuarioReprocann }) {
+  // Si usuarioReprocann es false, muestra reprocann primero.
+  const sortedOptions = usuarioReprocann === false
+    ? [options.find((o) => o.key === 'reprocann'), ...options.filter((o) => o.key !== 'reprocann')]
+    : options
+
   return (
     <section className="usuario-menu">
       {/* Encabezado de bienvenida al espacio de usuario. */}
@@ -44,7 +41,7 @@ function UsuarioMenu({ onBack, onNavigate }) {
 
       <div className="usuario-menu__grid">
         {/* Recorre las opciones configuradas y crea una tarjeta por cada seccion. */}
-        {options.map((option) => (
+        {sortedOptions.map((option) => (
           <article key={option.title} className="usuario-menu__card">
             <p className="usuario-menu__card-eyebrow">{option.eyebrow}</p>
             <h2>{option.title}</h2>
