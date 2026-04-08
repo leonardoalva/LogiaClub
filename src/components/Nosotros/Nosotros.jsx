@@ -9,13 +9,11 @@ const Nosotros = ({ onBack }) => {
         <p className="nosotros__eyebrow">Quiénes somos</p>
         <h1>LA LOGIA CLUB CANNÁBICO</h1>
         <p className="nosotros__lead">
-          La Logia es un círculo reservado donde convergen quienes sienten
-          afinidad por la planta y el conocimiento que la envuelve. No se trata
-          solo de un club, sino de un espacio de iniciación y encuentro, donde
-          la experiencia cannábica se vive desde la conciencia, la información y
-          el respeto. Aquí, cada integrante transita su propio camino acompañado
-          por una comunidad que valora la discreción, la calidad y la
-          profundidad de lo que se comparte.
+          La Logia es un espacio creado para personas que buscan sentirse
+          cómodas, informarse y conectar con otras que comparten el mismo
+          interés por el cannabis. Más allá del club, nos importa generar un
+          ambiente ameno, cuidado y sin vueltas, donde cada uno pueda acercarse
+          a su manera.
         </p>
       </div>
 
@@ -23,87 +21,77 @@ const Nosotros = ({ onBack }) => {
         {/* Bloque narrativo que resume la identidad y el enfoque del club. */}
         <section className="nosotros__section nosotros__section--story">
           <span className="nosotros__kicker">Nuestra esencia</span>
-          <h2>Un espacio resguardado, con identidad y propósito</h2>
+          <h2>Un espacio cercano, con identidad propia</h2>
           <p>
-            La Logia nace como un punto de resguardo para quienes sienten el
-            llamado de la planta y el conocimiento que la rodea. Un espacio
-            donde la pasión se comparte en confianza, donde el cultivo se
-            transforma en práctica consciente y el uso responsable en un
-            principio fundamental. Aquí, cada encuentro tiene sentido y cada
-            experiencia deja aprendizaje.
+            La Logia nació con una idea simple: armar un lugar donde se pueda
+            hablar de cannabis con naturalidad, sin prejuicios y con respeto.
+            Nos interesa que cada persona se sienta bienvenida y pueda vivir la
+            experiencia desde su propio camino.
           </p>
           <p>
-            Nuestra propuesta integra comunidad, guía y una atmósfera
-            cuidadosamente resguardada. Un entorno pensado para quienes valoran
-            la discreción, el respeto mutuo y la claridad en el camino. Más que
-            un espacio social, es un ámbito donde se cultiva tanto la planta
-            como la conciencia y el conocimiento.
+            Acá se mezclan buena compañía, información útil y un clima relajado.
+            Buscamos que el espacio se sienta genuino, reservado y agradable.
           </p>
         </section>
 
         {/* Tarjetas con los ejes principales de la propuesta. */}
         <section className="nosotros__highlights">
           <article className="nosotros__card">
-            <span className="nosotros__card-number">01</span>
+            {/* <span className="nosotros__card-number"></span> */}
             <h3>Comunidad</h3>
             <p>
-              Construimos un espacio de encuentro real entre personas que
-              comparten una misma filosofía: el respeto por la planta, el
-              cultivo consciente y la conexión humana. Fomentamos vínculos
-              genuinos en un entorno cuidado, sereno y privado, donde cada
-              integrante aporta su experiencia y se nutre de la del resto. La
-              comunidad no es solo un concepto, es el corazón vivo del club.
+              Lo valioso está en el intercambio, en las
+              charlas que surgen y en los vínculos que se van construyendo de
+              forma natural.
             </p>
           </article>
 
           <article className="nosotros__card">
-            <span className="nosotros__card-number">02</span>
+            {/* <span className="nosotros__card-number"></span> */}
             <h3>Aprendizaje</h3>
             <p>
-              Entendemos el cannabis como un camino de conocimiento. Generamos
-              espacios donde se comparten saberes sobre cultivo, genética, usos
-              responsables y cultura cannábica, integrando tanto la experiencia
-              práctica como el fundamento teórico. Buscamos formar cultivadores
-              conscientes, informados y comprometidos con un uso respetuoso y
-              responsable.
+              Compartimos información clara y útil sobre cultivo, genética y
+              consumo responsable. La idea es que cada
+              persona pueda sacarse dudas, aprender algo nuevo y sentirse más
+              segura en su camino.
             </p>
           </article>
-
+{/* 
           <article className="nosotros__card">
             <span className="nosotros__card-number">03</span>
             <h3>Experiencia</h3>
             <p>
-              Diseñamos cada detalle para ofrecer una experiencia que trascienda
-              el consumo. Desde la estética hasta la energía del espacio, todo
-              está pensado para generar una sensación de calma, identidad y
-              pertenencia. Un refugio donde bajar el ritmo, reconectar y habitar
-              el momento con presencia.
+              Cuidamos el ambiente para que cada visita se disfrute de verdad.
+              Desde la energía del lugar hasta los pequeños detalles, todo está
+              pensado para que te sientas a gusto, puedas relajarte y conectar
+              con el momento.
             </p>
           </article>
+           */}
         </section>
 
         {/* Lista de valores que guian la experiencia del club. */}
-<section className="nosotros__section nosotros__section--values">
-  <span className="nosotros__kicker">Lo que defendemos</span>
-  <ul className="nosotros__list">
-    <li>
-      La confidencialidad como principio sagrado: cada miembro es resguardado
-      dentro del círculo, donde el respeto no se negocia.
-    </li>
-    <li>
-      La claridad del conocimiento: promovemos un entendimiento profundo y
-      responsable del uso, lejos de la desinformación.
-    </li>
-    <li>
-      La experiencia consciente: cada encuentro es cuidado en su energía,
-      seguridad y propósito.
-    </li>
-    <li>
-      La construcción de lazos reales: una comunidad que se fortalece desde la
-      confianza, el compromiso y la presencia.
-    </li>
-  </ul>
-</section>
+        <section className="nosotros__section nosotros__section--values">
+          <span className="nosotros__kicker">Lo que nos guía</span>
+          <ul className="nosotros__list">
+            <li>
+              La confidencialidad: cuidamos la privacidad de cada persona y el
+              respeto dentro del espacio.
+            </li>
+            <li>
+              La información clara: compartimos contenido útil, directo y con
+              criterio.
+            </li>
+            <li>
+              La experiencia consciente: priorizamos encuentros con sentido, en
+              un ambiente cuidado.
+            </li>
+            <li>
+              Los vínculos reales: creemos en una comunidad que se construye
+              desde la confianza.
+            </li>
+          </ul>
+        </section>
 
         {/* Tarjeta de contacto reutilizable para iniciar una conversacion por WhatsApp. */}
         <WhatsAppCard className="nosotros__whatsapp-card" />
@@ -115,7 +103,7 @@ const Nosotros = ({ onBack }) => {
             type="button"
             onClick={onBack}
           >
-            Volver al menu principal
+            Volver al menú principal
           </button>
         </div>
       </div>
