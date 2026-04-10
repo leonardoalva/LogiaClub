@@ -7,12 +7,12 @@ const Nosotros = ({ onBack }) => {
       {/* Presentacion principal del club y su propuesta general. */}
       <div className="nosotros__hero">
         <p className="nosotros__eyebrow">Quiénes somos</p>
-        <h1>LA LOGIA CLUB CANNÁBICO</h1>
+        <h1>LA LOGIA CLUB CANNABICO</h1>
         <p className="nosotros__lead">
           La Logia es un espacio creado para personas que buscan sentirse
-          cómodas, informarse y conectar con otras que comparten el mismo
+          cómodas, informarse y conectar con otras que comparten el
           interés por el cannabis. Más allá del club, nos importa generar un
-          ambiente ameno, cuidado y sin vueltas, donde cada uno pueda acercarse
+          ambiente seguro donde cada uno pueda acercarse
           a su manera.
         </p>
       </div>
@@ -21,16 +21,14 @@ const Nosotros = ({ onBack }) => {
         {/* Bloque narrativo que resume la identidad y el enfoque del club. */}
         <section className="nosotros__section nosotros__section--story">
           <span className="nosotros__kicker">Nuestra esencia</span>
-          <h2>Un espacio cercano, con identidad propia</h2>
+          {/* <h2> texto </h2> */}
           <p>
             La Logia nació con una idea simple: armar un lugar donde se pueda
             hablar de cannabis con naturalidad, sin prejuicios y con respeto.
-            Nos interesa que cada persona se sienta bienvenida y pueda vivir la
-            experiencia desde su propio camino.
+            Nos interesa que cada persona se sienta bienvenida y pueda disfrutar de ser parte del club.
           </p>
           <p>
-            Acá se mezclan buena compañía, información útil y un clima relajado.
-            Buscamos que el espacio se sienta genuino, reservado y agradable.
+            Acá se mezcla la buena compañía, información útil y la ayuda mutua.
           </p>
         </section>
 
@@ -52,8 +50,7 @@ const Nosotros = ({ onBack }) => {
             <p>
               Compartimos información clara y útil sobre cultivo, genética y
               consumo responsable. La idea es que cada
-              persona pueda sacarse dudas, aprender algo nuevo y sentirse más
-              segura en su camino.
+              persona pueda sacarse dudas, aprender algo nuevo o compartir su experiencia.
             </p>
           </article>
 {/* 
@@ -79,13 +76,10 @@ const Nosotros = ({ onBack }) => {
               respeto dentro del espacio.
             </li>
             <li>
-              La información clara: compartimos contenido útil, directo y con
+              La información clara: compartimos contenido útil y con
               criterio.
             </li>
-            <li>
-              La experiencia consciente: priorizamos encuentros con sentido, en
-              un ambiente cuidado.
-            </li>
+
             <li>
               Los vínculos reales: creemos en una comunidad que se construye
               desde la confianza.
